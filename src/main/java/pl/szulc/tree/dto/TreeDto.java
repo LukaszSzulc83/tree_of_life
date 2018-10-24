@@ -6,6 +6,7 @@ public class TreeDto {
 	private Integer id;
 	private String treeName;
 	private List<PersonDto>listOfFamilyMembers;
+	
 	public Integer getId() {
 		return id;
 	}

@@ -1,18 +1,24 @@
 package pl.szulc.tree.dto;
 
+
+
 import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PersonDto{
 
-		private int id;
+		private Integer id;
 		private String firstName;
 		private String name;
+		@JsonFormat(pattern="yyyy-MM-dd")
 	    private Date dateOfBirth;
+		@JsonFormat(pattern="yyyy-MM-dd")
 	    private Date dateOfDeath;
 		String placeOfBirth;
 	    private String placeOfDeath;
 		private String comments;
-	    private int generation;
+	    private Integer generation;
 	    private boolean men;
 	    private boolean activity;
 	    private Integer personOnTreeID;
@@ -21,7 +27,7 @@ public class PersonDto{
 		private Integer spouseID;
 		private Integer treeID;
 	    
-	    public int getId() {
+	    public Integer getId() {
 			return id;
 		}
 		public void setId(int id) {
@@ -69,7 +75,7 @@ public class PersonDto{
 		public void setComments(String comments) {
 			this.comments = comments;
 		}
-		public int getGeneration() {
+		public Integer getGeneration() {
 			return generation;
 		}
 		public void setGeneration(int generation) {
@@ -107,6 +113,7 @@ public class PersonDto{
 		public void setFatherID(Integer fatherID) {
 			this.fatherID = fatherID;
 		}
+		
 		public Integer getSpouseID() {
 			return spouseID;
 		}

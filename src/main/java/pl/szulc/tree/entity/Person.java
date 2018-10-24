@@ -1,5 +1,9 @@
 package pl.szulc.tree.entity;
 
+
+
+
+
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -10,7 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
+//@NamedQueries(
+//value = { @NamedQuery(name = "", query = "DELETE WHERE ") })
 public class Person{
 	
 	@Id
@@ -20,8 +28,10 @@ public class Person{
 	private String firstName;
 	@Column(name = "NAME", nullable = false, length = 255)
 	private String name;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "DATE_OF_BIRTH", nullable = false)
     private Date dateOfBirth;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "DATE_OF_DEATH", nullable = true)
     private Date dateOfDeath;
 	@Column(name = "PLACE_OF_BIRTH", nullable = true, length = 255)
@@ -31,7 +41,7 @@ public class Person{
 	@Column(name = "COMMENTS", nullable = true, length = 1000)
 	private String comments;
 	@Column(name = "GENERATION", nullable = true)
-    private int generation;
+    private Integer generation;
 	@Column(name = "ACTIVITY", nullable = false)
     private boolean activity;
 	@Column(name = "MEN", nullable = false)
@@ -47,10 +57,8 @@ public class Person{
     @ManyToOne
     @JoinColumn(name = "tree_id")
 	private Tree tree;
-    
-    
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -99,7 +107,7 @@ public class Person{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public int getGeneration() {
+	public Integer getGeneration() {
 		return generation;
 	}
 	public void setGeneration(int generation) {
@@ -129,6 +137,7 @@ public class Person{
 	public void setFatherID(Integer fatherID) {
 		this.fatherID = fatherID;
 	}
+	
 	public Integer getSpouseID() {
 		return spouseID;
 	}

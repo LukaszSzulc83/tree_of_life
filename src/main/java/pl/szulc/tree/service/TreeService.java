@@ -1,12 +1,13 @@
 package pl.szulc.tree.service;
 
-import pl.szulc.tree.entity.Tree;
+import java.util.List;
+
+import pl.szulc.tree.dto.TreeDto;
 
 public interface TreeService{
 	
-	Tree createTree();
-	Tree removeTree();
-	Tree addNodeToTree();
-	
-	
+	String createOrUpdateTree(TreeDto treeDto);
+	String removeTree(TreeDto treeDto);
+	List<TreeDto> showAllTrees();
+	TreeDto findTreeById(Integer id);
 }

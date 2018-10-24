@@ -10,13 +10,13 @@ import pl.szulc.tree.entity.Person;
 
 @Component
 public class PersonMapper {
-
+	
 	public Person mapToEntity(Person person, PersonDto personDto) {
-		
+
 		if (person == null) {
 			person = new Person();
 		}
-		
+
 		if (personDto != null) {
 			person.setFirstName(personDto.getFirstName());
 			person.setName(personDto.getName());
@@ -34,10 +34,11 @@ public class PersonMapper {
 		}
 		return null;
 	}
-	
-	public PersonDto mapToDto(Person person){
+
+	public PersonDto mapToDto(Person person) {
 		if (person != null) {
 			PersonDto personDto = new PersonDto();
+			personDto.setId(person.getId());
 			personDto.setFirstName(person.getFirstName());
 			personDto.setName(person.getName());
 			personDto.setDateOfBirth(person.getDateOfBirth());
@@ -55,12 +56,19 @@ public class PersonMapper {
 		}
 		return null;
 	}
-	
-	public List<PersonDto> mapPersonEntityListToPersonDtoList(List<Person>persons){
-		List<PersonDto>personsDto = new ArrayList<>();
+
+	public List<PersonDto> mapPersonEntityListToPersonDtoList(List<Person> persons) {
+		List<PersonDto> personsDto = new ArrayList<>();
 		for (int i = 0; i < persons.size(); i++) {
 			personsDto.add(mapToDto(persons.get(i)));
 		}
 		return personsDto;
+	}
+
+	public List<Person> mapPersonDtoListToPersonEntityList(List<Person> persons, List<PersonDto> personsDto) {
+		for (int i = 0; i < personsDto.size(); i++) {
+			persons.add(mapToEntity(persons.get(i), personsDto.get(i)));
+		}
+		return persons;
 	}
 }

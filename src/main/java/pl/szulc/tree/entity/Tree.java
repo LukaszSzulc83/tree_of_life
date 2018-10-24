@@ -17,9 +17,9 @@ public class Tree{
 	@Column(name = "TREE_NAME", nullable = false)
 	private String treeName;
 	@OneToMany(mappedBy = "tree")
-	private List<Person>listOfFamilyMembers;
+	private List<TreeNode>listOfFamilyMembers;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -31,10 +31,10 @@ public class Tree{
 	public void setTreeName(String treeName) {
 		this.treeName = treeName;
 	}
-	public List<Person> getListOfFamilyMembers() {
+	public List<TreeNode> getListOfFamilyMembers() {
 		return listOfFamilyMembers;
 	}
-	public void setListOfFamilyMembers(List<Person> listOfFamilyMembers) {
+	public void setListOfFamilyMembers(List<TreeNode> listOfFamilyMembers) {
 		this.listOfFamilyMembers = listOfFamilyMembers;
 	}
 		
