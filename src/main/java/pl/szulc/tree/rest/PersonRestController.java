@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.szulc.tree.dto.PersonDto;
-import pl.szulc.tree.dto.PersonWithChildDto;
+import pl.szulc.tree.dto.PersonPlusDto;
 import pl.szulc.tree.service.PersonService;
+import pl.szulc.tree.service.TreeNodeService;
 
 @RestController
 @ResponseBody
@@ -23,15 +24,31 @@ public class PersonRestController {
 	@Autowired
 	PersonService personService; 
 	
+	@Autowired
+	TreeNodeService treeNodeService;
 	
 	@RequestMapping(value = "/person", method = RequestMethod.POST)
-	public String addPerson(@RequestBody PersonDto personDto) {
-		return personService.addOrUpdatePerson(personDto);
+	public void addPerson(@RequestBody PersonPlusDto personWithNodeDto) {
+		treeNodeService.addPersonToNode(personWithNodeDto);
+	}
+	
+	@RequestMapping(value = "/parent", method = RequestMethod.POST)
+	public void addParent(@RequestBody PersonPlusDto personWithNodeDto) {
+		if (personWithNodeDto.isMen()) {
+		treeNodeService.addFatherToNode(personWithNodeDto);
+		} else {
+		treeNodeService.addMotherToNode(personWithNodeDto);	
+		}
+	}
+	
+	@RequestMapping(value = "/spouse", method = RequestMethod.POST)
+	public void addSpouse(@RequestBody PersonPlusDto personWithNodeDto) {
+		treeNodeService.addSpouseToNode(personWithNodeDto);
 	}
 	
 	@RequestMapping(value = "/person", method = RequestMethod.PUT)
-	public String addParent(@RequestBody PersonWithChildDto personWithChildDto) {
-		return personService.addParentToChild(personWithChildDto);
+	public String updatePerson(@RequestBody PersonDto personDto) {
+		return personService.updatePerson(personDto);
 	}
 	
 	@RequestMapping(value = "/person/{id}", method = RequestMethod.GET)

@@ -2,12 +2,16 @@ package pl.szulc.tree.dao;
 
 import java.util.List;
 
-import pl.szulc.tree.entity.Tree;
+import pl.szulc.tree.dto.TreeDto;
+import pl.szulc.tree.dto.TreeNodeDto;
 
 public interface TreeRepositoryCustom {
-	String createTree(Tree tree);
-	String cutTree(Tree tree);
-	String updateTree(Tree tree);
-	List<Tree> findAllTrees();
-	Tree findTreeById(Integer id);
+	String createTree(TreeDto treeDto);
+	String cutTree(TreeDto treeDto);
+	String updateTree(TreeDto treeDto);
+	List<TreeDto> findAllTrees();
+	TreeDto findTreeById(Integer id);
+	List<TreeNodeDto> findAllNodesOfTree(Integer treeId);
+	void addNodeToTree(Integer treeId, Integer treeNodeId);
+	void addNodeListToTree(Integer treeId, List<TreeNodeDto> treeNodeIdList);
 }

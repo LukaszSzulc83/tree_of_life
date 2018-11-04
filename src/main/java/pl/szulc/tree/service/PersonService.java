@@ -3,15 +3,14 @@ package pl.szulc.tree.service;
 import java.util.List;
 
 import pl.szulc.tree.dto.PersonDto;
-import pl.szulc.tree.dto.PersonWithChildDto;
+import pl.szulc.tree.dto.PersonPlusDto;
 
 public interface PersonService{
-	String addOrUpdatePerson(PersonDto person);
-	String addParentToChild(PersonWithChildDto personWithChild);
-	String removePerson(PersonDto person);
+	PersonDto addPerson(PersonPlusDto personDto);
+	String updatePerson(PersonDto personDto);
+	String removePerson(PersonDto personDto);
 	List<PersonDto> showAllPersons();
-	List<PersonDto> showAllPersonsFromTreeByTreeName(String treeName);
 	PersonDto findPersonById(Integer id);
-	String addSpouse (PersonDto personDto);
+	PersonDto findByNameSurnameAndDateOfBirth(PersonDto personDto);
 	
 }

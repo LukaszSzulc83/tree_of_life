@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -46,18 +44,7 @@ public class Person{
     private boolean activity;
 	@Column(name = "MEN", nullable = false)
 	private boolean men;
-	@Column(name = "PERSON_ON_TREE_ID", nullable = true)
-	private Integer personOnTreeID;
-	@Column(name = "MOTHER_ID", nullable = true)
-	private Integer motherID;
-	@Column(name = "FATHER_ID", nullable = true)
-	private Integer fatherID;
-	@Column(name = "SPOUSE_ID", nullable = true)
-	private Integer spouseID;
-    @ManyToOne
-    @JoinColumn(name = "tree_id")
-	private Tree tree;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -125,38 +112,5 @@ public class Person{
 	public void setMen(boolean men) {
 		this.men = men;
 	}
-	public Integer getMotherID() {
-		return motherID;
-	}
-	public void setMotherID(Integer motherID) {
-		this.motherID = motherID;
-	}
-	public Integer getFatherID() {
-		return fatherID;
-	}
-	public void setFatherID(Integer fatherID) {
-		this.fatherID = fatherID;
-	}
-	
-	public Integer getSpouseID() {
-		return spouseID;
-	}
-	public void setSpouseID(Integer spouseID) {
-		this.spouseID = spouseID;
-	}
-	public Tree getTree() {
-		return tree;
-	}
-	public void setTree(Tree tree) {
-		this.tree = tree;
-	}
-	public Integer getPersonOnTreeID() {
-		return personOnTreeID;
-	}
-	public void setPersonOnTreeID(Integer personOnTreeID) {
-		this.personOnTreeID = personOnTreeID;
-	}
-	
-	
 }
 

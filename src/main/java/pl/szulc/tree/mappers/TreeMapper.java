@@ -1,5 +1,8 @@
 package pl.szulc.tree.mappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import pl.szulc.tree.dto.TreeDto;
@@ -29,6 +32,14 @@ public class TreeMapper {
 			return treeDto;
 		}
 		return null;
+	}
+	
+	public List<TreeDto> mapTreeEntityListToTreeDtoList(List<Tree> trees) {
+		List<TreeDto> treesDto = new ArrayList<>();
+		for (int i = 0; i < trees.size(); i++) {
+			treesDto.add(mapToDto(trees.get(i)));
+		}
+		return treesDto;
 	}
 
 }

@@ -26,10 +26,6 @@ public class PersonMapper {
 			person.setPlaceOfDeath(personDto.getPlaceOfDeath());
 			person.setComments(personDto.getComments());
 			person.setActivity(personDto.isActive());
-			person.setPersonOnTreeID(personDto.getPersonOnTreeID());
-			person.setMotherID(personDto.getMotherID());
-			person.setFatherID(personDto.getFatherID());
-			person.setSpouseID(personDto.getSpouseID());
 			return person;
 		}
 		return null;
@@ -47,11 +43,6 @@ public class PersonMapper {
 			personDto.setPlaceOfDeath(person.getPlaceOfDeath());
 			personDto.setComments(person.getComments());
 			personDto.setActivity(person.isActive());
-			personDto.setPersonOnTreeID(person.getPersonOnTreeID());
-			personDto.setMotherID(person.getMotherID());
-			personDto.setFatherID(person.getFatherID());
-			personDto.setSpouseID(person.getSpouseID());
-			personDto.setTreeID(person.getTree().getId());
 			return personDto;
 		}
 		return null;

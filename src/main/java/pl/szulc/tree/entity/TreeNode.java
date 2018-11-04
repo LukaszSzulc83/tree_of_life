@@ -3,7 +3,6 @@ package pl.szulc.tree.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -11,7 +10,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class TreeNode {
 	@Id
-	@GeneratedValue
 	private Integer id;
 	@OneToOne
 	private Person person;
@@ -23,8 +21,7 @@ public class TreeNode {
 	private Person spouse;
 	@OneToMany
 	private List<Person> childrens;
-	@OneToOne
-	private Tree tree;
+
 	public Integer getId() {
 		return id;
 	}
@@ -61,11 +58,4 @@ public class TreeNode {
 	public void setChildrens(List<Person> childrens) {
 		this.childrens = childrens;
 	}
-	public Tree getTree() {
-		return tree;
-	}
-	public void setTree(Tree tree) {
-		this.tree = tree;
-	}
-	
 }

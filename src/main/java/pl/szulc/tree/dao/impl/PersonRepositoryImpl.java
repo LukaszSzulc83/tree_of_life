@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import pl.szulc.tree.dao.PersonRepository;
 import pl.szulc.tree.dao.PersonRepositoryCustom;
+import pl.szulc.tree.dto.PersonDto;
 import pl.szulc.tree.entity.Person;
+import pl.szulc.tree.mappers.PersonMapper;
 
 @Transactional
 @Repository
@@ -20,65 +22,58 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom {
 	@Lazy
 	@Autowired
 	private PersonRepository personRepository;
-	
+	@Autowired
+	private PersonMapper personMapper;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public String addPerson(Person person) {
+	public PersonDto addPerson(PersonDto personDto) { 
+	    Person person = null;
+	    person = personMapper.mapToEntity(person, personDto);
 		personRepository.saveAndFlush(person);
-		return "save-OK";
+		return personMapper.mapToDto(person);
 	}
 
 	@Override
-	public String deletePerson(Person person) {
+	public String deletePerson(PersonDto personDto) {
+		Person person = personRepository.findOne(personDto.getId());
 		personRepository.delete(person);
 		personRepository.flush();
 		return "delete-OK";
 	}
 
 	@Override
-	public List<Person> findAllPerson() {
-		return personRepository.findAll();
+	public List<PersonDto> findAllPerson() {
+		return personMapper.mapPersonEntityListToPersonDtoList(personRepository.findAll());
 	}
 
 	@Override
-	public List<Person> findAllPersonFromTreeByTreeName(String treeName) {
+	public List<PersonDto> findAllPersonFromTreeByTreeName(String treeName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Person findById(Integer id) {
+	public PersonDto findById(Integer id) {
 		if(id == null) {
 			return null;
 		} 
-		return personRepository.getOne(id);
+		return personMapper.mapToDto(personRepository.getOne(id));
 	}
 
 	@Override
-	public Person findByNameSurnameAndDateOfBirth(Person person) {
+	public PersonDto findByNameSurnameAndDateOfBirth(PersonDto personDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String updatePerson(Person person) {
-		personRepository.saveAndFlush(person);
+	public String updatePerson(PersonDto personDto) {
+		Person person = personRepository.findOne(personDto.getId());
+		entityManager.merge(personMapper.mapToEntity(person, personDto));
 		return "update-OK";
-	}
-
-	@Override
-	public String addListOfPerson(List<Person> persons) {
-		personRepository.save(persons);
-		personRepository.flush();
-		return "Tree update - OK";
-	}
-
-	@Override
-	public String removeAllPersonsFromTree(Integer treeId) {
-		return null;
 	}
 
 }

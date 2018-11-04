@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.szulc.tree.dto.NewNodeDto;
 import pl.szulc.tree.dto.TreeDto;
 import pl.szulc.tree.service.TreeService;
 @RestController
@@ -20,7 +21,11 @@ public class TreeRestController {
 	
 	@RequestMapping(value = "/tree", method = RequestMethod.POST)
 	public String addTree(@RequestBody TreeDto treeDto) {
-		return treeService.createOrUpdateTree(treeDto);
+		return treeService.createTree(treeDto);
+	}
+	@RequestMapping(value = "/tree", method = RequestMethod.PUT)
+	public String updateTree(@RequestBody TreeDto treeDto) {
+		return treeService.updateTree(treeDto);
 	}
 	
 	@RequestMapping(value = "/tree/{id}", method = RequestMethod.GET)
@@ -33,4 +38,23 @@ public class TreeRestController {
 	public String deletePerson(@RequestBody TreeDto treeDto) {
 		return treeService.removeTree(treeDto);
 	}
+	
+	@RequestMapping(value = "/node", method = RequestMethod.POST)
+    public void addFirstNode(@RequestBody NewNodeDto newNodeDto) {
+        treeService.addFirstNodeToTree(newNodeDto);
+    }
+	
+	@RequestMapping(value = "/parentNode", method = RequestMethod.PUT)
+    public void addParentNode(@RequestBody NewNodeDto newNodeDto) {
+        treeService.addParentNodeToTree(newNodeDto);
+    }
+	@RequestMapping(value = "/spouseNode", method = RequestMethod.PUT)
+    public void addSpouseNode(@RequestBody NewNodeDto newNodeDto) {
+        treeService.addSpouseNodeToTree(newNodeDto);
+    }
+	
+	@RequestMapping(value = "/childNode", method = RequestMethod.PUT)
+    public void addChildNode(@RequestBody NewNodeDto newNodeDto) {
+        treeService.addChildNodeToTree(newNodeDto);
+    }
 }
